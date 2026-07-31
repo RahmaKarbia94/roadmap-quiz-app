@@ -2,7 +2,7 @@
 
 A quiz game about web development fundamentals (HTML, CSS, JavaScript,
 TypeScript, React, HTTP, Git, performance, accessibility). Built with
-React + Vite as **Day 1** of a "one coding project per day" challenge.
+React.
 
 ![tech](https://img.shields.io/badge/React-18-61DAFB) ![tech](https://img.shields.io/badge/Vite-5-646CFF)
 
