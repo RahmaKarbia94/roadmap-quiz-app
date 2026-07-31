@@ -1,0 +1,322 @@
+/* ---------- Design tokens ---------- */
+:root {
+  --bg: #12172b;
+  --surface: #1b2140;
+  --border: #2a3155;
+  --text: #f4f1ea;
+  --muted: #7c86b8;
+  --accent-amber: #ffb627;
+  --accent-lime: #c4f135;
+  --accent-red: #ff5d5d;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  font-family: "Space Grotesk", sans-serif;
+}
+
+.mono {
+  font-family: "JetBrains Mono", monospace;
+}
+
+/* ---------- Layout ---------- */
+.page {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  padding: 32px 16px;
+  position: relative;
+}
+
+.container {
+  width: 100%;
+  max-width: 560px;
+}
+
+/* ---------- Stat bar ---------- */
+.stat-bar {
+  display: flex;
+  justify-content: space-between;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 14px 20px;
+  margin-bottom: 20px;
+}
+
+.stat-block {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.stat-label {
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  color: var(--muted);
+}
+
+.stat-value {
+  font-size: 20px;
+  color: var(--text);
+  font-weight: 700;
+}
+
+.stat-value--accent {
+  color: var(--accent-lime);
+}
+
+/* ---------- Road progress ---------- */
+.road-wrap {
+  margin-bottom: 24px;
+}
+
+.road-track {
+  position: relative;
+  height: 6px;
+  background: var(--surface);
+  border-radius: 999px;
+  margin-bottom: 14px;
+}
+
+.road-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent-amber), var(--accent-lime));
+  border-radius: 999px;
+  transition: width 0.4s ease;
+}
+
+.road-marker {
+  position: absolute;
+  top: -9px;
+  color: var(--accent-lime);
+  font-size: 14px;
+  transition: left 0.4s ease;
+  animation: rqPulse 1.6s ease-in-out infinite;
+}
+
+.checkpoint-row {
+  display: flex;
+  justify-content: space-between;
+}
+
+.checkpoint {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--border);
+  border: 2px solid transparent;
+  transition: background 0.3s ease;
+}
+
+.checkpoint--passed {
+  background: var(--accent-lime);
+}
+
+.checkpoint--current {
+  background: var(--accent-amber);
+  border-color: var(--accent-amber);
+}
+
+/* ---------- Card / question ---------- */
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 28px 24px;
+  margin-bottom: 20px;
+}
+
+.question-tag {
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  color: var(--accent-amber);
+}
+
+.question-text {
+  font-size: 22px;
+  color: var(--text);
+  margin: 10px 0 22px;
+  line-height: 1.35;
+}
+
+.results-sub {
+  color: var(--muted);
+  margin-top: -8px;
+  margin-bottom: 20px;
+}
+
+.options-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.option {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 16px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  text-align: left;
+  width: 100%;
+  cursor: pointer;
+  transition: transform 0.12s ease, background 0.15s ease, border-color 0.15s ease;
+}
+
+.option:hover:not(.locked) {
+  transform: translateX(4px);
+  border-color: var(--accent-lime);
+}
+
+.option.locked {
+  cursor: default;
+}
+
+.option--correct {
+  background: rgba(196, 241, 53, 0.12);
+  border-color: var(--accent-lime);
+}
+
+.option--wrong {
+  background: rgba(255, 93, 93, 0.12);
+  border-color: var(--accent-red);
+}
+
+.option-letter {
+  color: var(--muted);
+  font-size: 13px;
+  width: 18px;
+}
+
+.option-text {
+  color: var(--text);
+  font-size: 15px;
+}
+
+.next-btn {
+  margin-top: 22px;
+  background: var(--accent-lime);
+  color: var(--bg);
+  border: none;
+  border-radius: 10px;
+  padding: 12px 20px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: "Space Grotesk", sans-serif;
+}
+
+/* ---------- Achievements ---------- */
+.ach-wrap {
+  margin-top: 8px;
+}
+
+.ach-row {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 10px;
+}
+
+.badge {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 6px 12px;
+  background: var(--surface);
+  opacity: 0.3;
+}
+
+.badge--unlocked {
+  opacity: 1;
+  border-color: var(--accent-amber);
+}
+
+.badge-icon {
+  font-size: 16px;
+}
+
+.badge-label {
+  font-size: 10px;
+  color: var(--text);
+}
+
+/* ---------- Toast ---------- */
+.toast {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--accent-amber);
+  border-radius: 10px;
+  padding: 10px 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+  animation: rqSlideUp 0.3s ease;
+}
+
+.toast-icon {
+  font-size: 18px;
+}
+
+.toast-title {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 11px;
+  color: var(--bg);
+  font-weight: 700;
+}
+
+.toast-label {
+  font-size: 14px;
+  color: var(--bg);
+  font-weight: 600;
+}
+
+/* ---------- Animations ---------- */
+.fade-in {
+  animation: rqFadeIn 0.35s ease;
+}
+
+@keyframes rqFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes rqPulse {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.15);
+  }
+}
+
+@keyframes rqSlideUp {
+  from {
+    opacity: 0;
+    transform: translate(-50%, 12px);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+}
